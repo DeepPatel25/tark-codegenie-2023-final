@@ -7,14 +7,28 @@ class Train {
     int distanceBetween;
     int costOfTicket;
     HashMap<String, Integer> bookingSlot;
+    HashMap<String, Integer> storeHashmap;
 
     Train(int id, String from, String to, int totalDistance) {
         this.trainID = id;
         this.journeyFrom = from;
         this.journeyTo = to;
         this.distanceBetween = totalDistance;
-        this.bookingSlot = new HashMap<String, Integer>();
+        this.bookingSlot = new HashMap<>();
+        this.bookingSlot.put("S", 0);
+        this.bookingSlot.put("B", 0);
+        this.bookingSlot.put("A", 0);
+        this.bookingSlot.put("H", 0);
         this.costOfTicket = totalDistance;
+    }
+
+    Train(Train t) {
+        this.trainID = t.trainID;
+        this.journeyFrom = t.journeyFrom;
+        this.journeyTo = t.journeyTo;
+        this.costOfTicket = t.costOfTicket;
+        this.bookingSlot = new HashMap<>(t.storeHashmap);
+        this.distanceBetween = t.distanceBetween;
     }
 }
 
@@ -42,74 +56,93 @@ class DayWiseTrainbooking {
         this.date = date;
         for (Train it : data.storeTrainData) {
             if (id == it.trainID) {
-                System.out.println("match");
-                this.daywiseBook = it;
+                this.daywiseBook = new Train(it);
             }
         }
     }
 }
 
 public class TrainBookingSystem {
-
+    static int counter = 100000001;
     public static Train trainCheck(String from, String to, Data data) {
 
         for (Train it : data.storeTrainData) {
-            System.out.println("In");
-            if ((from == it.journeyFrom) && (to == it.journeyTo)) {
+            if ((from.equals(it.journeyFrom)) && (to.equals(it.journeyTo))) {
                 return it;
             }
         }
         return null;
     }
 
-    public static void seatAvailable(Data data, String coach, int seatCount) {
+    public static void bookSlot(int seatCount, String coach, String distance) {
+        int cost = Integer.parseInt(distance);
+        if (coach.equals("SL")) {
+            System.out.println(counter + " " + (seatCount * cost));
+        } else if (coach.equals("3A")) {
+            System.out.println(counter + " " + (seatCount * cost * 2));
+        } else if (coach.equals("2A")) {
+            System.out.println(counter + " " + (seatCount * cost * 3));
+        } else if (coach.equals("1A")) {
+            System.out.println(counter + " " + (seatCount * cost * 4));
+        }
+        counter++;
+    }
+
+    public static void seatAvailable(Data data, String date, String coach, int seatCount) {
         for (DayWiseTrainbooking it : data.dayWiseBook) {
-            if (coach.equals("SL")) {
-                System.out.println("hello");
-                if (it.daywiseBook.bookingSlot.containsKey("S1") && it.daywiseBook.bookingSlot.get("S1") >= seatCount) {
-                    int temp2 = it.daywiseBook.bookingSlot.get("S1") - seatCount;
-                    it.daywiseBook.bookingSlot.put("S1", temp2);
-                } else if (it.daywiseBook.bookingSlot.containsKey("S2")
-                        && it.daywiseBook.bookingSlot.get("S2") >= seatCount) {
-                    int temp2 = it.daywiseBook.bookingSlot.get("S2") - seatCount;
-                    it.daywiseBook.bookingSlot.put("S2", temp2);
+            if (it.date.equals(date)) {
+
+                if (coach.equals("SL")) {
+                    if (it.daywiseBook.bookingSlot.get("S") >= seatCount) {
+                        int temp2 = it.daywiseBook.bookingSlot.get("S") - seatCount;
+                        it.daywiseBook.bookingSlot.put("S", temp2);
+
+                        bookSlot(seatCount, coach, Integer.toString(it.daywiseBook.distanceBetween));
+                        return;
+                    } else {
+                        System.out.println("No seat Available");
+                        return;
+                    }
+                } else if (coach.equals("3A")) {
+                    if (it.daywiseBook.bookingSlot.containsKey("B")) {
+                        if (it.daywiseBook.bookingSlot.get("B") >= seatCount) {
+                            int temp2 = it.daywiseBook.bookingSlot.get("B") - seatCount;
+                            it.daywiseBook.bookingSlot.put("B", temp2);
+                            bookSlot(seatCount, coach, Integer.toString(it.daywiseBook.distanceBetween));
+                            return;
+                        } else {
+                            System.out.println("No seat Available");
+                            return;
+                        }
+                    }
+                } else if (coach.equals("2A")) {
+                    if (it.daywiseBook.bookingSlot.containsKey("A")) {
+                        if (it.daywiseBook.bookingSlot.get("A") >= seatCount) {
+                            int temp2 = it.daywiseBook.bookingSlot.get("A") - seatCount;
+                            it.daywiseBook.bookingSlot.put("A", temp2);
+                            bookSlot(seatCount, coach, Integer.toString(it.daywiseBook.distanceBetween));
+                            return;
+                        } else {
+                            System.out.println("No seat Available");
+                            return;
+                        }
+                    }
+                } else if (coach.equals("1A")) {
+                    if (it.daywiseBook.bookingSlot.containsKey("H")) {
+                        if (it.daywiseBook.bookingSlot.get("H") >= seatCount) {
+                            int temp2 = it.daywiseBook.bookingSlot.get("H") - seatCount;
+                            it.daywiseBook.bookingSlot.put("H", temp2);
+                            bookSlot(seatCount, coach, Integer.toString(it.daywiseBook.distanceBetween));
+                            return;
+                        } else {
+                            System.out.println("No seat Available");
+                            return;
+                        }
+                    }
                 } else {
                     System.out.println("No seat Available");
                     return;
                 }
-            } else if (coach == "3A") {
-                if (it.daywiseBook.bookingSlot.containsKey("B1")) {
-                    if (it.daywiseBook.bookingSlot.get("B1") >= seatCount) {
-                        int temp2 = it.daywiseBook.bookingSlot.get("B1") - seatCount;
-                        it.daywiseBook.bookingSlot.put("B1", temp2);
-                    } else {
-                        System.out.println("No seat Available");
-                        return;
-                    }
-                }
-            } else if (coach == "2A") {
-                if (it.daywiseBook.bookingSlot.containsKey("A1")) {
-                    if (it.daywiseBook.bookingSlot.get("A1") >= seatCount) {
-                        int temp2 = it.daywiseBook.bookingSlot.get("A1") - seatCount;
-                        it.daywiseBook.bookingSlot.put("A1", temp2);
-                    } else {
-                        System.out.println("No seat Available");
-                        return;
-                    }
-                }
-            } else if (coach == "1A") {
-                if (it.daywiseBook.bookingSlot.containsKey("H1")) {
-                    if (it.daywiseBook.bookingSlot.get("H1") >= seatCount) {
-                        int temp2 = it.daywiseBook.bookingSlot.get("H1") - seatCount;
-                        it.daywiseBook.bookingSlot.put("H1", temp2);
-                    } else {
-                        System.out.println("No seat Available");
-                        return;
-                    }
-                }
-            } else {
-                System.out.println("No seat Available");
-                return;
             }
         }
 
@@ -130,27 +163,39 @@ public class TrainBookingSystem {
             String[] temp1 = sc.nextLine().split(" ");
             for (int i = 1; i < temp1.length; i++) {
                 String seat[] = temp1[i].split("-");
-                trainData.bookingSlot.put(seat[0], Integer.parseInt(seat[1]));
+                if (seat[0].charAt(0) == 'S') {
+                    int value = trainData.bookingSlot.get("S") + Integer.parseInt((seat[1]));
+                    trainData.bookingSlot.replace("S", value);
+                } else if (seat[0].charAt(0) == 'B') {
+                    int value = trainData.bookingSlot.get("B") + Integer.parseInt((seat[1]));
+                    trainData.bookingSlot.put("B", value);
+                } else if (seat[0].charAt(0) == 'A') {
+                    int value = trainData.bookingSlot.get("A") + Integer.parseInt((seat[1]));
+                    trainData.bookingSlot.put("A", value);
+                } else if (seat[0].charAt(0) == 'H') {
+                    int value = trainData.bookingSlot.get("H") + Integer.parseInt((seat[1]));
+                    trainData.bookingSlot.put("H", value);
+                }
             }
 
+            trainData.storeHashmap = new HashMap<>(trainData.bookingSlot);
             // Printing the Train Data
-            // storeData.storeTrainData.add(trainData);
+            storeData.storeTrainData.add(trainData);
             trainCount--;
         }
 
-        storeData.print();
-
         while (true) {
             String[] inputBookingRequest = sc.nextLine().split(" ");
-            if (trainCheck(inputBookingRequest[0], inputBookingRequest[1], storeData) == null) {
+            if (trainCheck(inputBookingRequest[0], inputBookingRequest[1], storeData) != null) {
                 Train train1 = trainCheck(inputBookingRequest[0], inputBookingRequest[1], storeData);
-                DayWiseTrainbooking daywise = new DayWiseTrainbooking(17726,
+                DayWiseTrainbooking daywise = new DayWiseTrainbooking(train1.trainID,
                         inputBookingRequest[2],
                         storeData);
                 storeData.dayWiseBook.add(daywise);
-                seatAvailable(storeData, inputBookingRequest[3], Integer.parseInt(inputBookingRequest[4]));
+                seatAvailable(storeData, inputBookingRequest[2], inputBookingRequest[3],
+                        Integer.parseInt(inputBookingRequest[4]));
             } else {
-                System.out.println("Train not Available");
+                System.out.println("No Train Available");
             }
         }
     }
