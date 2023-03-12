@@ -150,7 +150,7 @@ public class TrainBookingSystem {
                 storeData.dayWiseBook.add(daywise);
                 seatAvailable(storeData, inputBookingRequest[3], Integer.parseInt(inputBookingRequest[4]));
             } else {
-                System.out.println("Train is not Available");
+                System.out.println("Train not Available");
             }
         }
     }
