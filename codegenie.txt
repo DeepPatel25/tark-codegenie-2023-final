@@ -1,0 +1,16 @@
+https://bit.ly/codegenie-2023
+https://bit.ly/codegenie-2023-tests
+https://bit.ly/codegenie-2023-submissions
+
+
+2
+17726 Rajkot-0 Mumbai-750
+17226 S1-72 S2-72 B1-72 A1-48 H1-24
+37392 Ahmedabad-0 Surat-300
+37392 S1-15 S2-20 S3-50 B1-36 B2-48
+Rajkot Mumbai 2023-03-15 SL 6
+Rajkot Mumbai 2023-03-15 1A 24
+Rajkot Mumbai 2023-03-15 1A 1
+Rajkot Mumbai 2023-03-16 1A 10
+Rajkot Chennai 2023-03-16 1A 10
+

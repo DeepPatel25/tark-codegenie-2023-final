@@ -1,0 +1,28 @@
+4
+37393 Ahmedabad-0 Pune-700
+37393 S1-72 S2-72 B1-72 A1-48 H1-24
+17726 Rajkot-0 Mumbai-750
+17726 S1-72 S2-72 B1-72 A1-48 H1-24
+22548 Ahmedabad-0 Surat-300
+22548 S1-15 S2-20 B1-36 B2-48
+72097 Mumbai-0 Jaipur-1000
+72097 S1-15 S2-20 B1-25 H1-10
+Ahmedabad Pune 2023-03-15 SL 3
+Rajkot Surat 2023-02-21 3A 4
+Ahmedabad Surat 2023-02-23 1A 5
+Ahmedabad Pune 2023-03-23 SL 15
+Ahmedabad Pune 2023-03-23 SL 15
+Ahmedabad Pune 2023-03-23 SL 10
+Ahmedabad Pune 2023-03-23 1A 10
+Ahmedabad Pune 2023-03-23 1A 5
+Ahmedabad Pune 2023-03-23 1A 5
+Mumbai Jaipur 2023-03-23 SL 2
+Mumbai Jaipur 2023-03-23 SL 5
+Mumbai Jaipur 2023-03-23 SL 7
+Mumbai Jaipur 2023-03-23 3A 1
+Mumbai Jaipur 2023-03-23 3A 2
+Mumbai Jaipur 2023-03-23 3A 4
+Ahmedabad Pune 2023-03-26 SL 72
+Ahmedabad Pune 2023-03-26 SL 36
+Ahmedabad Surat 2023-03-18 SL 25
+Ahmedabad Surat 2023-03-18 SL 11
