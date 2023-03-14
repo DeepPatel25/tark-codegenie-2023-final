@@ -32,7 +32,6 @@ class Train {
     }
 
     public int get_distance() {
-        System.out.println(this.distanceBetween);
         return this.distanceBetween;
     }
 }
